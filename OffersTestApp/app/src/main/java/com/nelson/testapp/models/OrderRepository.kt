@@ -18,7 +18,7 @@ object OrderRepository {
      * @param items - The new items for the OrderRepository
      */
     @JvmStatic
-    fun setItems(items: ArrayList<OrderItem>) {
+    fun setItems(items: List<OrderItem>) {
         ITEMS.clear()
         ITEMS.addAll(items)
     }

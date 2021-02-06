@@ -2,6 +2,7 @@ package com.nelson.testapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,12 @@ import coil.load
 
 import com.nelson.testapp.models.OrderItem
 import com.nelson.testapp.models.OrderRepository
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.io.IOException
+import java.lang.reflect.ParameterizedType
 
 /**
  * An activity representing a list of OrderItems. This activity
@@ -40,12 +47,33 @@ class OrderListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
+        val json = getJsonDataFromAsset("offers.json")
+        loadOrdersIntoRepository(json!!)
+
         if (findViewById<NestedScrollView>(R.id.item_detail_container) != null) {
             // If this view is present, then the activity should be in two-pane mode.
             twoPane = true
         }
 
         setupRecyclerView(findViewById(R.id.item_list))
+    }
+
+    private fun getJsonDataFromAsset(fileName: String): String? {
+        val jsonString: String
+        try {
+            jsonString = assets.open(fileName).bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            Log.e("Local JSON error", "error in JSON file $ioException")
+            return null
+        }
+        return jsonString
+    }
+
+    private fun loadOrdersIntoRepository(json: String) {
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+        val type = Types.newParameterizedType(List::class.java, OrderItem::class.java)
+        val orderAdapter : JsonAdapter<List<OrderItem>> = moshi.adapter(type)
+        OrderRepository.setItems(orderAdapter.fromJson(json)!!)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -92,7 +120,7 @@ class OrderListActivity : AppCompatActivity() {
             val item = values[position]
             holder.orderValue.text = item.value
             holder.orderName.text = item.name
-            holder.orderImage.load(item.url) {
+            if (item.url != null) holder.orderImage.load(item.url) {
                 placeholder(R.drawable.placeholder)
             }
 
