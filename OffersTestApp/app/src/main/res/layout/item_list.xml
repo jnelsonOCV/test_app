@@ -8,5 +8,5 @@
     android:layout_height="match_parent"
     android:layout_marginHorizontal="8dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ItemListActivity"
+    tools:context=".OrderListActivity"
     tools:listitem="@layout/order_item" />

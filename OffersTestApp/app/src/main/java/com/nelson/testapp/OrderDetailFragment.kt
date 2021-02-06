@@ -12,11 +12,11 @@ import com.nelson.testapp.models.OrderRepository
 
 /**
  * A fragment representing a single Item detail screen.
- * This fragment is either contained in a [ItemListActivity]
- * in two-pane mode (on tablets) or a [ItemDetailActivity]
+ * This fragment is either contained in a [OrderListActivity]
+ * in two-pane mode (on tablets) or a [OrderDetailActivity]
  * on handsets.
  */
-class ItemDetailFragment : Fragment() {
+class OrderDetailFragment : Fragment() {
 
     /**
      * The dummy content this fragment is presenting.

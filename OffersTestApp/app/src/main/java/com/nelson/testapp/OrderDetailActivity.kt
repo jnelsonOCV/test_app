@@ -12,9 +12,9 @@ import android.view.MenuItem
  *
  * This activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a [ItemListActivity].
+ * in a [OrderListActivity].
  */
-class ItemDetailActivity : AppCompatActivity() {
+class OrderDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +37,10 @@ class ItemDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = ItemDetailFragment().apply {
+            val fragment = OrderDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ItemDetailFragment.ARG_ITEM_ID,
-                            intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID))
+                    putString(OrderDetailFragment.ARG_ITEM_ID,
+                            intent.getStringExtra(OrderDetailFragment.ARG_ITEM_ID))
                 }
             }
 
@@ -53,7 +53,7 @@ class ItemDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) =
             when (item.itemId) {
                 android.R.id.home -> {
-                    navigateUpTo(Intent(this, ItemListActivity::class.java))
+                    navigateUpTo(Intent(this, OrderListActivity::class.java))
                     true
                 }
                 else -> super.onOptionsItemSelected(item)
