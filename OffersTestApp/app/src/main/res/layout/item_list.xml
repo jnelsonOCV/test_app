@@ -6,7 +6,8 @@
     android:name="com.nelson.testapp.ItemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="8dp"
+    android:paddingTop="10pt"
+    android:layout_marginHorizontal="8pt"
     app:layoutManager="LinearLayoutManager"
     tools:context=".OrderListActivity"
     tools:listitem="@layout/order_item" />

@@ -78,7 +78,7 @@ class OrderListActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, OrderRepository.ITEMS, twoPane)
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        if (!twoPane) recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
     class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
@@ -124,6 +124,8 @@ class OrderListActivity : AppCompatActivity() {
                 placeholder(R.drawable.placeholder)
             }
 
+            holder.orderFavorite.load(if (item.isFavorite) R.drawable.favorite else R.drawable.unfavorite)
+
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
@@ -136,6 +138,7 @@ class OrderListActivity : AppCompatActivity() {
             val orderImage: ImageView = view.findViewById(R.id.order_image)
             val orderValue: TextView = view.findViewById(R.id.order_value)
             val orderName: TextView = view.findViewById(R.id.order_name)
+            val orderFavorite: ImageView = view.findViewById(R.id.order_favorite)
         }
     }
 }
