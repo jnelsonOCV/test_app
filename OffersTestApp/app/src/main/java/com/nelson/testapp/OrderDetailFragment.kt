@@ -34,7 +34,7 @@ class OrderDetailFragment : Fragment() {
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
                 item = OrderRepository.getItem(it.getString(ARG_ITEM_ID)!!)
-                activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.name
+                activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.value
             }
         }
 
@@ -44,7 +44,7 @@ class OrderDetailFragment : Fragment() {
             item?.isFavorite = !item!!.isFavorite
             reloadFab()
             val text = if (item!!.isFavorite) "favorited" else "unfavorited"
-            Snackbar.make(view, "Item $text", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Order $text", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
     }
@@ -58,7 +58,8 @@ class OrderDetailFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
         item?.let {
-            rootView.findViewById<TextView>(R.id.item_detail).text = it.description
+            rootView.findViewById<TextView>(R.id.item_detail_title).text = it.name
+            rootView.findViewById<TextView>(R.id.item_detail_desc).text = it.description
         }
 
         return rootView

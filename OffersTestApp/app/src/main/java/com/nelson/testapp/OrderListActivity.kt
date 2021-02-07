@@ -47,14 +47,19 @@ class OrderListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        val json = getJsonDataFromAsset("offers.json")
-        loadOrdersIntoRepository(json!!)
+        if (OrderRepository.ITEMS.isEmpty()) {
+            val json = getJsonDataFromAsset("offers.json")
+            loadOrdersIntoRepository(json!!)
+        }
 
         if (findViewById<NestedScrollView>(R.id.item_detail_container) != null) {
             // If this view is present, then the activity should be in two-pane mode.
             twoPane = true
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
         setupRecyclerView(findViewById(R.id.item_list))
     }
 
@@ -92,15 +97,7 @@ class OrderListActivity : AppCompatActivity() {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as OrderItem
                 if (twoPane) {
-                    val fragment = OrderDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(OrderDetailFragment.ARG_ITEM_ID, item.id)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.item_detail_container, fragment)
-                            .commit()
+                    updateDetailPane(item)
                 } else {
                     val intent = Intent(v.context, OrderDetailActivity::class.java).apply {
                         putExtra(OrderDetailFragment.ARG_ITEM_ID, item.id)
@@ -133,6 +130,18 @@ class OrderListActivity : AppCompatActivity() {
         }
 
         override fun getItemCount() = values.size
+
+        private fun updateDetailPane(item: OrderItem) {
+            val fragment = OrderDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString(OrderDetailFragment.ARG_ITEM_ID, item.id)
+                }
+            }
+            parentActivity.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.item_detail_container, fragment)
+                .commit()
+        }
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val orderImage: ImageView = view.findViewById(R.id.order_image)
