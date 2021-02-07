@@ -64,6 +64,13 @@ class OrderListActivity : AppCompatActivity() {
         setupRecyclerView(findViewById(R.id.item_list))
     }
 
+    /**
+     * Retrieves JSON data as String from asset .json file
+     *
+     * @param fileName - The filename of the asset to be parsed
+     *
+     * @return String representing JSON data
+     */
     private fun getJsonDataFromAsset(fileName: String): String? {
         val jsonString: String
         try {
@@ -108,6 +115,11 @@ class OrderListActivity : AppCompatActivity() {
             }
         }
 
+        /**
+         * Updates OrderDetailFragment with the newly selected OrderItem
+         *
+         * @param item - The new OrderItem that was selected
+         */
         private fun updateDetailPane(item: OrderItem) {
             val fragment = OrderDetailFragment().apply {
                 arguments = Bundle().apply {

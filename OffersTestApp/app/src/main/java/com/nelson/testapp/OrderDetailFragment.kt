@@ -64,6 +64,9 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
         }
     }
 
+    /**
+     * Refreshes the FloatingActionButton's image depending on if item is a favorite or not
+     */
     private fun reloadFab() {
         if (item != null) fab?.load(if (item!!.isFavorite) R.drawable.favorite else R.drawable.unfavorite)
     }
@@ -72,6 +75,7 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
+        // Fill TextViews with data from Item
         item?.let {
             rootView.findViewById<TextView>(R.id.item_detail_title).text = it.name
             rootView.findViewById<TextView>(R.id.item_detail_desc).text = it.description
