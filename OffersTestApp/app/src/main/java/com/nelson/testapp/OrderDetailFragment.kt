@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 /**
- * A fragment representing a single Item detail screen.
+ * A fragment representing a single OrderItem detail screen.
  *
  * This fragment is either contained in a [OrderListActivity]
  * in two-pane mode (on tablets) or a [OrderDetailActivity]
@@ -31,7 +31,7 @@ import kotlin.coroutines.CoroutineContext
 class OrderDetailFragment : Fragment(), CoroutineScope {
 
     /**
-     * The content this fragment is presenting.
+     * The OrderItem for the fragment to present.
      */
     private var item: OrderItem? = null
 
