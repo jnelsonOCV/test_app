@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:requiresFadingEdge="vertical"
-    android:paddingTop="10pt"
-    android:layout_marginHorizontal="8pt"
+    android:paddingTop="10dp"
+    android:layout_marginHorizontal="8dp"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
     tools:context=".OrderListActivity"
     tools:listitem="@layout/order_item" />

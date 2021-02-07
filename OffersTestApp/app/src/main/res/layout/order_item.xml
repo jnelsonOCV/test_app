@@ -26,7 +26,7 @@
             android:layout_height="0dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/light_gray"
-            app:cardCornerRadius="5pt"
+            app:cardCornerRadius="5dp"
             app:layout_constraintDimensionRatio="1.25:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
-                android:layout_margin="6pt" />
+                android:layout_margin="6dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -55,7 +55,7 @@
         android:ellipsize="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8pt"
+        android:layout_marginTop="8dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:ellipsize="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3pt"
-        android:layout_marginBottom="24pt"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="24dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>
