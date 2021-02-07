@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
  * A model representing an Order.
  *
  * @property id - The identifier of the order
- * @property url - The link to the web hosted image
+ * @property url - The web link to the product's image for the order
  * @property name - The name of the product for the order
  * @property description - The details of the order
  * @property value - The current "cash back" value of the order
