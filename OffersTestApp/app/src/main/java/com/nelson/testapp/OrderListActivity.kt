@@ -25,12 +25,13 @@ import java.io.IOException
 import java.lang.reflect.ParameterizedType
 
 /**
- * An activity representing a list of OrderItems. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [OrderDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * An activity representing a list of OrderItems.
+ *
+ * This activity has different presentations for handset and tablet-size devices.
+ * On handsets, the activity presents a list of items, which when touched,
+ * lead to a [OrderDetailActivity] representing item details.
+ * On tablets, the activity presents the list of items and item
+ * details (in a [OrderDetailFragment]) side-by-side using two panes.
  */
 class OrderListActivity : AppCompatActivity() {
 

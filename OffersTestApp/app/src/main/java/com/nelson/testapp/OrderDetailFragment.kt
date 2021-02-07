@@ -23,6 +23,7 @@ import kotlin.coroutines.CoroutineContext
 
 /**
  * A fragment representing a single Item detail screen.
+ *
  * This fragment is either contained in a [OrderListActivity]
  * in two-pane mode (on tablets) or a [OrderDetailActivity]
  * on handsets.
