@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/maroon</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -29,7 +30,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Theme.OffersTestApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.OffersTestApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.OffersTestApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

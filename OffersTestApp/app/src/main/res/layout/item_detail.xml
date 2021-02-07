@@ -11,6 +11,7 @@
         style="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/text_color"
         android:paddingVertical="20dp"
         android:paddingHorizontal="16dp"
         android:textIsSelectable="true"
