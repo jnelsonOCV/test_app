@@ -10,11 +10,10 @@
         android:id="@+id/item_detail_title"
         style="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textColor="@color/text_color"
         android:paddingVertical="20dp"
         android:paddingHorizontal="16dp"
-        android:textIsSelectable="true"
         tools:context=".OrderDetailFragment" />
 
     <TextView
@@ -23,9 +22,9 @@
         style="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/gray"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
-        android:textIsSelectable="true"
         tools:context=".OrderDetailFragment" />
 
 </LinearLayout>

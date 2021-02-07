@@ -11,17 +11,15 @@
     android:showDividers="middle"
     tools:context=".OrderListActivity">
 
-    <!--
-    This layout is a two-pane layout for the Items master/detail flow.
-    -->
-
+    <!--This a two-pane layout for tablet screens.-->
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/item_list"
         android:name="com.nelson.testapp.ItemListFragment"
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp"
+        android:paddingTop="10pt"
+        android:layout_marginHorizontal="8pt"
         android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:context="com.nelson.testapp.OrderListActivity"
