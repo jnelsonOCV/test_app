@@ -1,17 +1,25 @@
 package com.nelson.testapp
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import coil.ImageLoader
 import coil.load
+import coil.request.ImageRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.nelson.testapp.models.OrderItem
 import com.nelson.testapp.models.OrderRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * A fragment representing a single Item detail screen.
@@ -19,7 +27,7 @@ import com.nelson.testapp.models.OrderRepository
  * in two-pane mode (on tablets) or a [OrderDetailActivity]
  * on handsets.
  */
-class OrderDetailFragment : Fragment() {
+class OrderDetailFragment : Fragment(), CoroutineScope {
 
     /**
      * The content this fragment is presenting.
@@ -28,13 +36,19 @@ class OrderDetailFragment : Fragment() {
 
     private val fab : FloatingActionButton? by lazy { activity?.findViewById<FloatingActionButton>(R.id.fab) }
 
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
                 item = OrderRepository.getItem(it.getString(ARG_ITEM_ID)!!)
-                activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = item?.value
+                val toolBarLayout = activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
+                toolBarLayout?.title = item?.value
+                val image = activity?.findViewById<ImageView>(R.id.detail_image)
+                image?.load(item?.url)
             }
         }
 

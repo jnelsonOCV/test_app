@@ -22,6 +22,7 @@
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
+        android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:context="com.nelson.testapp.OrderListActivity"
         tools:listitem="@layout/order_item" />
