@@ -107,6 +107,18 @@ class OrderListActivity : AppCompatActivity() {
             }
         }
 
+        private fun updateDetailPane(item: OrderItem) {
+            val fragment = OrderDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString(OrderDetailFragment.ARG_ITEM_ID, item.id)
+                }
+            }
+            parentActivity.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.item_detail_container, fragment)
+                .commit()
+        }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.order_item, parent, false)
@@ -130,18 +142,6 @@ class OrderListActivity : AppCompatActivity() {
         }
 
         override fun getItemCount() = values.size
-
-        private fun updateDetailPane(item: OrderItem) {
-            val fragment = OrderDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(OrderDetailFragment.ARG_ITEM_ID, item.id)
-                }
-            }
-            parentActivity.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.item_detail_container, fragment)
-                .commit()
-        }
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val orderImage: ImageView = view.findViewById(R.id.order_image)

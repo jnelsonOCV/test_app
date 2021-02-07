@@ -2,6 +2,16 @@ package com.nelson.testapp.models
 
 import com.squareup.moshi.Json
 
+/**
+ * A model representing an Order.
+ *
+ * @property id - The identifier of the order
+ * @property url - The link to the web hosted image
+ * @property name - The name of the product for the order
+ * @property description - The details of the order
+ * @property value - The current "cash back" value of the order
+ * @property isFavorite - Whether the order is a favorite of the user or not
+ */
 class OrderItem(val id: String,
                 val url: String?,
                 val name: String,
