@@ -1,6 +1,7 @@
 package com.nelson.testapp.models
 
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 /**
  * A model representing an Order.
@@ -16,6 +17,5 @@ class OrderItem(val id: String,
                 val url: String?,
                 val name: String,
                 val description: String,
-                @Json(name = "current_value") val value: String) {
-    var isFavorite = false
-}
+                @Json(name = "current_value") val value: String,
+                var isFavorite: Boolean = false) : Serializable

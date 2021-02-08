@@ -1,5 +1,10 @@
 package com.nelson.testapp.models
 
+import android.app.Activity
+import android.content.Context
+import android.util.Log
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.util.ArrayList
 
 /**
@@ -35,5 +40,44 @@ object OrderRepository {
             if (it.id == id) return it
         }
         return null
+    }
+
+    /**
+     * Caches the orders to save user's favorite orders.
+     *
+     * @param activity - Activity needed to write to file
+     */
+    fun cacheOrders(activity: Activity): Boolean {
+        val cacheName = "ORDERS"
+        try {
+            activity.openFileOutput(cacheName, Context.MODE_PRIVATE).use { fos ->
+                val oos = ObjectOutputStream(fos)
+                oos.writeObject(ITEMS)
+                oos.close()
+            }
+        } catch (e: Exception) {
+            Log.d("CACHE", "Caching error for $cacheName")
+        }
+        return true
+    }
+
+    /**
+     * Loads the orders to recover user's favorite orders.
+     *
+     * @param activity - Activity needed to read from file
+     */
+    fun loadOrders(activity: Activity): Any? {
+        val cacheName = "ORDERS"
+        try {
+            activity.openFileInput(cacheName).use { fis ->
+                val ois = ObjectInputStream(fis)
+                val data = ois.readObject()
+                ois.close()
+                return data
+            }
+        } catch (e: Exception) {
+            Log.d("CACHE", "Couldn't read cache for $cacheName")
+            return null
+        }
     }
 }

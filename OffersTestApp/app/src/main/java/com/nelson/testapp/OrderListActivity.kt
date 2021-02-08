@@ -23,7 +23,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.io.IOException
-import java.lang.reflect.ParameterizedType
 
 /**
  * An activity representing a list of OrderItems.
@@ -41,6 +40,8 @@ class OrderListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
+    private var orderAdapter: JsonAdapter<List<OrderItem>>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
@@ -49,9 +50,15 @@ class OrderListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        if (OrderRepository.ITEMS.isEmpty()) {
-            val json = getJsonDataFromAsset("offers.json")
-            loadOrdersIntoRepository(json!!)
+        val orders = OrderRepository.loadOrders(this) as List<OrderItem>?
+
+        if (orders.isNullOrEmpty()) {
+            if (OrderRepository.ITEMS.isEmpty()) {
+                val json = readJsonDataFromAsset("offers.json")
+                loadOrdersIntoRepository(json!!)
+            }
+        } else {
+            OrderRepository.setItems(orders)
         }
 
         if (findViewById<NestedScrollView>(R.id.item_detail_container) != null) {
@@ -72,6 +79,11 @@ class OrderListActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        OrderRepository.cacheOrders(this)
+    }
+
     /**
      * Retrieves JSON data as String from asset .json file
      *
@@ -79,7 +91,7 @@ class OrderListActivity : AppCompatActivity() {
      *
      * @return String representing JSON data
      */
-    private fun getJsonDataFromAsset(fileName: String): String? {
+    private fun readJsonDataFromAsset(fileName: String): String? {
         val jsonString: String
         try {
             jsonString = assets.open(fileName).bufferedReader().use { it.readText() }
@@ -93,8 +105,8 @@ class OrderListActivity : AppCompatActivity() {
     private fun loadOrdersIntoRepository(json: String) {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val type = Types.newParameterizedType(List::class.java, OrderItem::class.java)
-        val orderAdapter : JsonAdapter<List<OrderItem>> = moshi.adapter(type)
-        OrderRepository.setItems(orderAdapter.fromJson(json)!!)
+        orderAdapter = moshi.adapter(type)
+        OrderRepository.setItems(orderAdapter!!.fromJson(json)!!)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

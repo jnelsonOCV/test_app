@@ -6,6 +6,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import com.nelson.testapp.models.OrderRepository
 
 /**
  * An activity representing a single OrderItem detail screen.
@@ -38,6 +39,11 @@ class OrderDetailActivity : AppCompatActivity() {
                     .add(R.id.item_detail_container, fragment)
                     .commit()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        OrderRepository.cacheOrders(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
