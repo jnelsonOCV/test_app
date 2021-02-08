@@ -40,9 +40,18 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    /**
+     * Refreshes the FloatingActionButton's image depending on if item is a favorite or not
+     */
+    private fun reloadFab() {
+        if (item != null) fab?.load(if (item!!.isFavorite) R.drawable.favorite else R.drawable.unfavorite)
+    }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.item_detail, container, false)
+
+        // Grab OrderItem by identifier and setup collapsing toolbar
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
                 item = OrderRepository.getItem(it.getString(ARG_ITEM_ID)!!)
@@ -62,20 +71,8 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
             Snackbar.make(view, "Order $text", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-    }
 
-    /**
-     * Refreshes the FloatingActionButton's image depending on if item is a favorite or not
-     */
-    private fun reloadFab() {
-        if (item != null) fab?.load(if (item!!.isFavorite) R.drawable.favorite else R.drawable.unfavorite)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.item_detail, container, false)
-
-        // Fill TextViews with data from Item
+        // Fill TextViews with data from OrderItem
         item?.let {
             rootView.findViewById<TextView>(R.id.item_detail_title).text = it.name
             rootView.findViewById<TextView>(R.id.item_detail_desc).text = it.description
