@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -77,6 +78,8 @@ class OrderListActivity : AppCompatActivity() {
         scrollUp.setOnClickListener {
             recyclerView.smoothScrollToPosition(0)
         }
+
+        findViewById<CoordinatorLayout>(R.id.coordinator_layout).visibility = View.VISIBLE
     }
 
     override fun onPause() {
