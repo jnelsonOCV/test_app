@@ -106,6 +106,11 @@ class OrderListActivity : AppCompatActivity() {
         return jsonString
     }
 
+    /**
+     * Converts JSON data from String to List<OrderItem> and loads into OrderRepository
+     *
+     * @param json - String representing JSON data for parsing
+     */
     private fun loadOrdersIntoRepository(json: String) {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val type = Types.newParameterizedType(List::class.java, OrderItem::class.java)
@@ -113,15 +118,22 @@ class OrderListActivity : AppCompatActivity() {
         OrderRepository.setItems(orderAdapter!!.fromJson(json)!!)
     }
 
+    /**
+     * Sets up RecyclerView adapter and layoutManager
+     *
+     * @param recyclerView - The RecyclerView for setting the adapter
+     */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, OrderRepository.ITEMS, twoPane)
         if (!twoPane) recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
-    inner class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
+    /**
+     * Inner Adapter class for defining RecyclerView layout behavior
+     */
+    class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
                                         private val values: List<OrderItem>,
-                                        private val twoPane: Boolean) :
-            RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+                                        private val twoPane: Boolean) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val sufficientScroll = 20
 
