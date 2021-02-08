@@ -74,6 +74,7 @@ class OrderListActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.item_list)
         setupRecyclerView(recyclerView!!)
 
+        // Setup Scroll to Top FAB
         val scrollUp = findViewById<FloatingActionButton>(R.id.scroll_up_fab)
         scrollUp.setOnClickListener {
             recyclerView.smoothScrollToPosition(0)
@@ -122,7 +123,7 @@ class OrderListActivity : AppCompatActivity() {
                                         private val twoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
-        private val SUFFICIENT_SCROLL = 20
+        private val sufficientScroll = 20
 
         private val onClickListener: View.OnClickListener
 
@@ -180,7 +181,7 @@ class OrderListActivity : AppCompatActivity() {
 
             // Only show scrollUp FAB if the user has scrolled down to the 20th position
             val scrollUp = parentActivity.findViewById<FloatingActionButton>(R.id.scroll_up_fab)
-            if (position > SUFFICIENT_SCROLL) {
+            if (position > sufficientScroll) {
                 scrollUp.visibility = View.VISIBLE
             } else {
                 scrollUp.visibility = View.INVISIBLE
