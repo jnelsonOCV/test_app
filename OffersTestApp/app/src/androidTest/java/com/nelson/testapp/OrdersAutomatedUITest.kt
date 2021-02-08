@@ -39,6 +39,8 @@ class OrdersAutomatedUITest {
                 )
             )
         )
+
+        // Select 1st item in orders RecyclerView
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
         val imageButton = onView(
@@ -48,6 +50,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
+        // Verify Image matches
         imageButton.check(matches(isDisplayed()))
 
         val appCompatImageButton = onView(
@@ -69,6 +72,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
+        // Press back button to navigate back to OrderListActivity
         appCompatImageButton.perform(click())
 
         val textView = onView(
@@ -83,6 +87,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
+        // Verify App Title is correct (to make sure back on home page)
         textView.check(matches(withText("Offers App")))
 
         val recyclerView2 = onView(
@@ -94,6 +99,7 @@ class OrdersAutomatedUITest {
                 )
             )
         )
+        // Select 20th item in orders RecyclerView
         recyclerView2.perform(actionOnItemAtPosition<ViewHolder>(19, click()))
 
         val imageButton2 = onView(
@@ -124,6 +130,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
+        // Press back button to navigate back to OrderListActivity
         appCompatImageButton2.perform(click())
     }
 
