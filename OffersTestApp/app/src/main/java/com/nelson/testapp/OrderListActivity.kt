@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import com.nelson.testapp.models.OrderItem
 import com.nelson.testapp.models.OrderRepository
@@ -61,7 +62,14 @@ class OrderListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        setupRecyclerView(findViewById(R.id.item_list))
+
+        val recyclerView = findViewById<RecyclerView>(R.id.item_list)
+        setupRecyclerView(recyclerView!!)
+
+        val scrollUp = findViewById<FloatingActionButton>(R.id.scroll_up_fab)
+        scrollUp.setOnClickListener {
+            recyclerView.smoothScrollToPosition(0)
+        }
     }
 
     /**
@@ -94,10 +102,12 @@ class OrderListActivity : AppCompatActivity() {
         if (!twoPane) recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
+    inner class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
                                         private val values: List<OrderItem>,
                                         private val twoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+
+        private val SUFFICIENT_SCROLL = 20
 
         private val onClickListener: View.OnClickListener
 
@@ -151,6 +161,14 @@ class OrderListActivity : AppCompatActivity() {
             with(holder.itemView) {
                 tag = item
                 setOnClickListener(onClickListener)
+            }
+
+            // Only show scrollUp FAB if the user has scrolled down to the 20th position
+            val scrollUp = parentActivity.findViewById<FloatingActionButton>(R.id.scroll_up_fab)
+            if (position > SUFFICIENT_SCROLL) {
+                scrollUp.visibility = View.VISIBLE
+            } else {
+                scrollUp.visibility = View.INVISIBLE
             }
         }
 

@@ -28,6 +28,15 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include layout="@layout/item_list" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/scroll_up_fab"
+            android:visibility="invisible"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/margin"
+            android:src="@drawable/scroll_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
