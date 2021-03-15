@@ -1,6 +1,5 @@
 package com.nelson.testapp
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -9,31 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import coil.ImageLoader
 import coil.load
-import coil.request.ImageRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.nelson.testapp.models.OrderItem
-import com.nelson.testapp.models.OrderRepository
+import com.nelson.testapp.models.OfferItem
+import com.nelson.testapp.models.OfferRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 /**
- * A fragment representing a single OrderItem detail screen.
+ * A fragment representing a single OfferItem detail screen.
  *
- * This fragment is either contained in a [OrderListActivity]
- * in two-pane mode (on tablets) or a [OrderDetailActivity]
+ * This fragment is either contained in a [OfferListActivity]
+ * in two-pane mode (on tablets) or a [OfferDetailActivity]
  * on handsets.
  */
-class OrderDetailFragment : Fragment(), CoroutineScope {
+class OfferDetailFragment : Fragment(), CoroutineScope {
 
     /**
-     * The OrderItem for the fragment to present.
+     * The OfferItem for the fragment to present.
      */
-    private var item: OrderItem? = null
+    private var item: OfferItem? = null
 
     private val fab : FloatingActionButton? by lazy { activity?.findViewById<FloatingActionButton>(R.id.fab) }
 
@@ -51,10 +47,10 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
-        // Grab OrderItem by identifier and setup collapsing toolbar
+        // Grab OfferItem by identifier and setup collapsing toolbar
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
-                item = OrderRepository.getItem(it.getString(ARG_ITEM_ID)!!)
+                item = OfferRepository.getItem(it.getString(ARG_ITEM_ID)!!)
                 val toolBarLayout = activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
                 toolBarLayout?.title = item?.value
                 val image = activity?.findViewById<ImageView>(R.id.detail_image)
@@ -72,7 +68,7 @@ class OrderDetailFragment : Fragment(), CoroutineScope {
                 .setAction("Action", null).show()
         }
 
-        // Fill TextViews with data from OrderItem
+        // Fill TextViews with data from OfferItem
         item?.let {
             rootView.findViewById<TextView>(R.id.item_detail_title).text = it.name
             rootView.findViewById<TextView>(R.id.item_detail_desc).text = it.description

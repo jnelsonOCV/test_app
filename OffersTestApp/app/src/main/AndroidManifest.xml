@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OffersTestApp">
         <activity
-            android:name=".OrderListActivity"
+            android:name=".OfferListActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.OffersTestApp.NoActionBar">
             <intent-filter>
@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OrderDetailActivity"
+            android:name=".OfferDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".OrderListActivity"
+            android:parentActivityName=".OfferListActivity"
             android:theme="@style/Theme.OffersTestApp.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nelson.testapp.OrderListActivity" />
+                android:value="com.nelson.testapp.OfferListActivity" />
         </activity>
     </application>
 

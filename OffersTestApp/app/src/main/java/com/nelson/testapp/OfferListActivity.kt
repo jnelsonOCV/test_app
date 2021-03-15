@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-import com.nelson.testapp.models.OrderItem
-import com.nelson.testapp.models.OrderRepository
+import com.nelson.testapp.models.OfferItem
+import com.nelson.testapp.models.OfferRepository
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -30,18 +30,18 @@ import java.io.IOException
  *
  * This activity has different presentations for handset and tablet-size devices.
  * On handsets, the activity presents a list of items, which when touched,
- * lead to a [OrderDetailActivity] representing item details.
+ * lead to a [OfferDetailActivity] representing item details.
  * On tablets, the activity presents the list of items and item
- * details (in a [OrderDetailFragment]) side-by-side using two panes.
+ * details (in a [OfferDetailFragment]) side-by-side using two panes.
  */
-class OrderListActivity : AppCompatActivity() {
+class OfferListActivity : AppCompatActivity() {
 
     /**
      * Whether or not the activity is in two-pane mode (running on a tablet)
      */
     private var twoPane: Boolean = false
 
-    private var orderAdapter: JsonAdapter<List<OrderItem>>? = null
+    private var offerAdapter: JsonAdapter<List<OfferItem>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,15 +51,15 @@ class OrderListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        val orders = OrderRepository.loadOrders(this) as List<OrderItem>?
+        val offers = OfferRepository.loadOffers(this) as List<OfferItem>?
 
-        if (orders.isNullOrEmpty()) {
-            if (OrderRepository.ITEMS.isEmpty()) {
+        if (offers.isNullOrEmpty()) {
+            if (OfferRepository.ITEMS.isEmpty()) {
                 val json = readJsonDataFromAsset("offers.json")
-                loadOrdersIntoRepository(json!!)
+                loadOffersIntoRepository(json!!)
             }
         } else {
-            OrderRepository.setItems(orders)
+            OfferRepository.setItems(offers)
         }
 
         if (findViewById<NestedScrollView>(R.id.item_detail_container) != null) {
@@ -85,7 +85,7 @@ class OrderListActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        OrderRepository.cacheOrders(this)
+        OfferRepository.cacheOffers(this)
     }
 
     /**
@@ -107,15 +107,15 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     /**
-     * Converts JSON data from String to List<OrderItem> and loads into OrderRepository
+     * Converts JSON data from String to List<OfferItem> and loads into OfferRepository
      *
      * @param json - String representing JSON data for parsing
      */
-    private fun loadOrdersIntoRepository(json: String) {
+    private fun loadOffersIntoRepository(json: String) {
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-        val type = Types.newParameterizedType(List::class.java, OrderItem::class.java)
-        orderAdapter = moshi.adapter(type)
-        OrderRepository.setItems(orderAdapter!!.fromJson(json)!!)
+        val type = Types.newParameterizedType(List::class.java, OfferItem::class.java)
+        offerAdapter = moshi.adapter(type)
+        OfferRepository.setItems(offerAdapter!!.fromJson(json)!!)
     }
 
     /**
@@ -124,15 +124,15 @@ class OrderListActivity : AppCompatActivity() {
      * @param recyclerView - The RecyclerView for setting the adapter
      */
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, OrderRepository.ITEMS, twoPane)
+        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, OfferRepository.ITEMS, twoPane)
         if (!twoPane) recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
     /**
      * Inner Adapter class for defining RecyclerView layout behavior
      */
-    class SimpleItemRecyclerViewAdapter(private val parentActivity: OrderListActivity,
-                                        private val values: List<OrderItem>,
+    class SimpleItemRecyclerViewAdapter(private val parentActivity: OfferListActivity,
+                                        private val values: List<OfferItem>,
                                         private val twoPane: Boolean) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         private val sufficientScroll = 20
@@ -141,12 +141,12 @@ class OrderListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as OrderItem
+                val item = v.tag as OfferItem
                 if (twoPane) {
                     updateDetailPane(item)
                 } else {
-                    val intent = Intent(v.context, OrderDetailActivity::class.java).apply {
-                        putExtra(OrderDetailFragment.ARG_ITEM_ID, item.id)
+                    val intent = Intent(v.context, OfferDetailActivity::class.java).apply {
+                        putExtra(OfferDetailFragment.ARG_ITEM_ID, item.id)
                     }
                     v.context.startActivity(intent)
                 }
@@ -154,14 +154,14 @@ class OrderListActivity : AppCompatActivity() {
         }
 
         /**
-         * Updates OrderDetailFragment with the newly selected OrderItem
+         * Updates OfferDetailFragment with the newly selected OfferItem
          *
-         * @param item - The new OrderItem that was selected
+         * @param item - The new OfferItem that was selected
          */
-        private fun updateDetailPane(item: OrderItem) {
-            val fragment = OrderDetailFragment().apply {
+        private fun updateDetailPane(item: OfferItem) {
+            val fragment = OfferDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putString(OrderDetailFragment.ARG_ITEM_ID, item.id)
+                    putString(OfferDetailFragment.ARG_ITEM_ID, item.id)
                 }
             }
             parentActivity.supportFragmentManager

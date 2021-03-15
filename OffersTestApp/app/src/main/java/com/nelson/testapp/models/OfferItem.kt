@@ -13,7 +13,7 @@ import java.io.Serializable
  * @property value - The current "cash back" value of the order
  * @property isFavorite - Whether the order is a favorite of the user or not
  */
-class OrderItem(val id: String,
+class OfferItem(val id: String,
                 val url: String?,
                 val name: String,
                 val description: String,

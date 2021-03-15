@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".OrderListActivity">
+    tools:context=".OfferListActivity">
 
     <!--This a two-pane layout for tablet screens.-->
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
         android:layout_marginHorizontal="8dp"
         android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:context="com.nelson.testapp.OrderListActivity"
+        tools:context="com.nelson.testapp.OfferListActivity"
         tools:listitem="@layout/order_item" />
 
     <FrameLayout

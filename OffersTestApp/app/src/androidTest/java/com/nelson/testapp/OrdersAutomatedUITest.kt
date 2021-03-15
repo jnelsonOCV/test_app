@@ -22,14 +22,14 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class OrdersAutomatedUITest {
+class OffersAutomatedUITest {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(OrderListActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(OfferListActivity::class.java)
 
     @Test
-    fun ordersAutomatedTest() {
+    fun offersAutomatedTest() {
         val recyclerView = onView(
             allOf(
                 withId(R.id.item_list),
@@ -40,7 +40,7 @@ class OrdersAutomatedUITest {
             )
         )
 
-        // Select 1st item in orders RecyclerView
+        // Select 1st item in offers RecyclerView
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
         val imageButton = onView(
@@ -72,7 +72,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
-        // Press back button to navigate back to OrderListActivity
+        // Press back button to navigate back to OfferListActivity
         appCompatImageButton.perform(click())
 
         val textView = onView(
@@ -99,7 +99,7 @@ class OrdersAutomatedUITest {
                 )
             )
         )
-        // Select 20th item in orders RecyclerView
+        // Select 20th item in offers RecyclerView
         recyclerView2.perform(actionOnItemAtPosition<ViewHolder>(19, click()))
 
         val imageButton2 = onView(
@@ -130,7 +130,7 @@ class OrdersAutomatedUITest {
                 isDisplayed()
             )
         )
-        // Press back button to navigate back to OrderListActivity
+        // Press back button to navigate back to OfferListActivity
         appCompatImageButton2.perform(click())
     }
 
