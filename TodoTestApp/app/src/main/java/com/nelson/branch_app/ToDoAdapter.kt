@@ -1,7 +1,6 @@
 package com.nelson.branch_app
 
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.nelson.branch_app.data.ToDoModel
 import com.nelson.branch_app.utility.DialogUtilities
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
 /**
  * Adapter class for defining the To-do RecyclerView's layout behavior (i.e. search filtering)
  */
-
 class ToDoAdapter(private val values: List<ToDoModel>,
                   private val frag: ToDoFragment) : RecyclerView.Adapter<ToDoAdapter.ViewHolder>() {
 

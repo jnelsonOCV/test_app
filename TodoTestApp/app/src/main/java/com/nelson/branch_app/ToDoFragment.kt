@@ -15,6 +15,9 @@ import com.nelson.branch_app.databinding.FragTodoBinding
 import com.nelson.branch_app.utility.DialogUtilities
 import com.nelson.branch_app.viewmodel.ToDoListViewModel
 
+/**
+ * Fragment class for displaying the To-do lists and managing search bar
+ */
 class ToDoFragment : Fragment() {
 
     lateinit var todoListViewModel : ToDoListViewModel
