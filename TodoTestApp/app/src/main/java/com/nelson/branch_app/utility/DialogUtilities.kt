@@ -57,7 +57,7 @@ object DialogUtilities {
     fun showDeleteListDialog(frag: ToDoFragment, header: ToDoModel) {
         val dialog = createDialog(frag)
         val body = dialog.findViewById(R.id.dialog_title) as TextView
-        body.text = "Are you sure you want to delete the to-do list, ${header.title}?"
+        body.text = "Are you sure you want to delete the entire to-do list named ${header.title}?"
         val input = dialog.findViewById(R.id.dialog_input) as EditText
         input.visibility = View.GONE
         val confirm = dialog.findViewById(R.id.dialog_confirm) as ImageView
