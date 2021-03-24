@@ -54,7 +54,7 @@ object DialogUtilities {
         dialog.show()
     }
 
-    fun showDeleteListDialog(frag: ToDoFragment, header: ToDoModel) {
+    fun showDeleteListDialog(frag: ToDoFragment, header: ToDoModel) : Dialog {
         val dialog = createDialog(frag)
         val body = dialog.findViewById(R.id.dialog_title) as TextView
         body.text = "Are you sure you want to delete the entire to-do list named ${header.title}?"
@@ -68,6 +68,7 @@ object DialogUtilities {
             }
         }
         dialog.show()
+        return dialog
     }
 
     private fun createDialog(frag: ToDoFragment) : Dialog {

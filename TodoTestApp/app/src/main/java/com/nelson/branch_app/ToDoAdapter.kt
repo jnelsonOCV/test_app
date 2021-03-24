@@ -70,12 +70,17 @@ class ToDoAdapter(private var todos: List<ToDoModel>,
     }
 
     /**
-     * Deletes list of to-dos or to-do item from list at the given position
+     * Deletes list of to-dos or to-do item from list
      */
     fun deleteToDo(item: ToDoModel) {
         frag.lifecycleScope.launch {
             when (item.type) {
-                0 -> DialogUtilities.showDeleteListDialog(frag, item)
+                0 -> {
+                    val dialog = DialogUtilities.showDeleteListDialog(frag, item)
+                    dialog.setOnDismissListener {
+                        notifyDataSetChanged()
+                    }
+                }
                 else -> frag.todoListViewModel.deleteToDo(item)
             }
         }
