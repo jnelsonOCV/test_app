@@ -105,7 +105,7 @@ class ToDoAdapter(private var todos: List<ToDoModel>,
      * Extension function for checking if ToDoModel matches the query
      */
     private fun ToDoModel.isMatch(text: String) : Boolean {
-        return this.title.toLowerCase().contains(text) || this.listId.contains(text)
+        return this.title.toLowerCase().contains(text)
     }
 
     override fun getItemCount() = filtered.size

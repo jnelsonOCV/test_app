@@ -11,12 +11,12 @@ class ToDoUnitTest {
 
     @Test
     fun todo_fieldAccess() {
-        val image = "/images/1033/dynamic/foodandrecipes/2015/07/TANDORI_GRILLED_SHRIMP_1053_800x800.jpg"
-        val filter = "[\\\\\\\"contentTags.food_cookingmethod.tags: Grilling\\\\\\\"]\""
-        val todoModel = ToDoModel(image, filter, "Summer Grilling")
-        assertEquals(image, todoModel.image)
-        assertEquals("Summer Grilling", todoModel.title)
-        assertEquals(filter, todoModel.filter)
+        val todoModel = ToDoModel(0, 0.toString(), "Title")
+        assertEquals("Title", todoModel.title)
+        assertEquals(0, todoModel.id)
+        assertEquals("0", todoModel.listId)
+        assertEquals(false, todoModel.isChecked)
+        assertEquals(1, todoModel.type)
     }
 
 }
